@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage[a4paper, total={7.3in, 10in}]{geometry}
+\usepackage{fancyhdr}
+\usepackage[urlcolor=blue, colorlinks=true]{hyperref}
+\usepackage[dvipsnames]{xcolor}
+
+\topmargin = -43pt
+\setlength{\footskip}{10pt}
+\headsep = 20pt
+\title{thejar\_bioTest\_10-17-16\_report}
+\pagestyle{fancy}
+\lhead{Biological testing of motif finding pipeline}
+\rhead{Jeff Robertson - 10/17/16}
+\begin{document}
+
+\section{Introduction}
+I tested the orange\_pipeline.py motif finding tool with biological data obtained
+from \url{http://www.yeastract.com/}. These are the steps I took to perform
+this test and the results I found.
+
+\section{Methods}
+\subsection{Data Acquisition}
+All data was acquired from \url{http://www.yeastract.com/download.php}. The files
+used were
+\texttt{prometer\_sequences.fasta.gz},
+\texttt{RegulationMatrix\_Documented\_2013927.csv.gz}, and
+\texttt{TFConsensusList\_20130918.transfac.gz}.
+The consensus list file was used to determine which transcription factors bound
+to which motifs and the regulation matrix file was used to determine which
+transcription factors were associated with which promoter sequences. First,
+promoter sequences which were extremely short ($< 30$ bp's) were filtered out,
+then a list of associated promoter sequences was assembled for each reasonably
+conserved motif using transcription factors to determine these associations.
+For each motif, all associated sequences were searched to determine which ones
+were truly positive for that motif. The first 35 of these were used to create
+the positive fasta file for the test associated with that motif. All the
+promoter sequences were then searched and the first 35 that were found to not
+contain the motif were used to create the negative fasta file. This process
+resulted in 89 pairs of fasta files.
+\subsection{Running the tests}
+I then ran the pipeline on each pair of fasta files (positive and negative) with
+the only parameter being the target motif width (-w) set equal to the length of
+the motif used to create the fasta files.
+\subsection{Comparison scoring}
+In evaluating the results, I used the same edit distance based comparison that
+is used in the pipeline itself. This assigns a score to the comparison of two
+strings that represents how similar they are and accounts for string length so
+as to not unfairly inflate the scores of comparisons between longer strings.
+\section{Results}
+\subsection{Overall success at finding target motifs}
+This is an evaluation of the pipeline as a whole and how well it found motifs
+in the selected biological data.
+\subsubsection{Local compare}
+The simplest evaluation of the pipeline is simply how similar the 3 results
+were to the target motif. For each test, I compared each of the 3 results to
+the target motif and took the max of these comparison scores. Using this
+method I found that in approxamately 28\% of the tests (25/89) the pipeline
+reported a result that was extremely close to the target motf (score $>= 4$),
+in the next 36\% of the tests (32/89) the pipeline reported a result that
+had some similarity to the target motif ($4 >$ score $>= 3.5$), and in the
+remaining tests the pipeline only reported motifs which had very little
+similarity to the target motif (score $< 3.5$).\\
+Detailed results can be found at
+\url{http://bioinformatics.cs.vt.edu/~thejar/testResults2/localCompare.html}
+\subsubsection{Global compare}
+While looking at the results of the local comparisons, I noticed that because
+of the overlap in sequences used between the tests, in some tests the pipeline
+would report motifs that were more conserved than
+the target motif and were similar or identical to target motifs of other tests.
+To try to account for this, I compared each target motif to the results from
+all the tests and took the best match. Using this global comparison method I
+found that almost all (82/89) of the target motifs were found within a high
+degree of similarity (score $> 4$), but in only 15\% of the tests (14/89) was
+the best global result found in the local results.\\
+Detailed results can be found at
+\url{http://bioinformatics.cs.vt.edu/~thejar/testResults2/globalCompare.html}
+
+\subsection{Picking correct results}
+This is an evaluation of the pipeline and how it combines the results of the 
+individual tools and as such will look at how good the chosen top 3 result
+motifs are compared to all results found by the motif discovery tools for a
+given test.\\
+\subsubsection{Comparison out of all local results}
+I compared each result from the individual tools to the target motif. In
+approxamately 20\% of the test cases
+(18/89) the pipeline correctly included the best result among the listed top 3
+results. In the next 38\% of the tests (34/89) it selected results that were
+only slightly worse than the best result. The rest of the tests (33/89) picked
+results that were notably worse than the closest match.\\
+Detailed results can be found at
+\url{http://bioinformatics.cs.vt.edu/~thejar/testResults2/localDiff.html}
+
+\subsubsection{Contributions from each tool}
+Comparing how many times the top selected results are from each tool to the
+number of times the best result is from each tool give us the follwing table.
+Selected is the percentage of the time that the selected results are from a
+each tool and best is the percentage of the time that the true best result is
+from each tool.\\
+
+\begin{tabular}{lccc}
+    &Selected&Best&Difference\\
+    weeder&0.36&0.20&0.154\\
+    CMF&0.25&0.54&-0.288\\
+    DECOD&0.05&0.04&0.004\\
+    BioProspector&0.33&0.16&0.176\\
+    MEME&0.01&0.06&-0.045\\
+\end{tabular}\\
+
+\noindent
+This shows us that the results from DECOD are slightly over represented in the
+selected results proprotional to how good they are, the results from weeder and
+BioProspector are significantly over represented, the results from MEME are
+slightly under represented, and the results from CMF are significantly under
+represented.\\
+
+\end{document}

@@ -1,0 +1,1 @@
+SP freq files generated using 700 bp files acquired from pombase. Ideal would be 1000 bp files

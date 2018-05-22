@@ -1,0 +1,548 @@
+============= RESULTS MOTIF SEARCH =============
+
+
+	----Motif Number 1: ----
+ => T C A C G T T 
+	E-Value: 1.07e-06,	occ: 100.00 % (20 of 20 sequences)
+	IUPAC: T C A C G T T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 2: ----
+ => C/G/T G A/G/T A/C/G T A/C/G/T C A/G/T G C/G/T G G C A/G G 
+	E-Value: 3.53e-01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: B G D V T N C D G B G G C R G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 3: ----
+ => A/G C G A/G A/C/T C/G A/T T G G/T C G A/G/T A/C 
+	E-Value: 3.82e-01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: R C G R H S W T G K C G D M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 4: ----
+ => A/T G T A/T A/C/T T A/T G/T G/T A/T A/G/T T A C A/T A A/T 
+	E-Value: 4.20e-01,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: W G T W H T W K K W D T A C W A W 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 5: ----
+ => A A G A/C/T A G A/C/T C A/C/T G/T G A A/G G A/G A/C/G/T A/C/G 
+	E-Value: 1.47e+00,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: A A G H A G H C H K G A R G R N V 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 6: ----
+ => G/T A T C A/C C G G/T C/T A/G G/T C/G 
+	E-Value: 1.59e+00,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: K A T C M C G K Y R K S 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 7: ----
+ => A/T A/T C/G T A/G C A/T G G G 
+	E-Value: 2.10e+00,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: W W S T R C W G G G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 8: ----
+ => T A T A/G/T A/G A/C T A T G A/T A/T 
+	E-Value: 2.33e+00,	occ: 45.00 % (9 of 20 sequences)
+	IUPAC: T A T D R M T A T G W W 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 9: ----
+ => A/C A/T C/T A A/T C T A/G C G C T A/G A/T A/G T A 
+	E-Value: 2.47e+00,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: M W Y A W C T R C G C T R W R T A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 10: ----
+ => C A/G T A/C/G A/G C G T G C A T 
+	E-Value: 2.55e+00,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: C R T V R C G T G C A T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 11: ----
+ => A/T C G T C/T A T C G T 
+	E-Value: 2.99e+00,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: W C G T Y A T C G T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 12: ----
+ => A/C/G/T A/T C/T A A C/G C/G A/G/T A/C/T C/G G A A/G T C/G G T 
+	E-Value: 3.93e+00,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: N W Y A A S S D H S G A R T S G T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 13: ----
+ => C/T A/T C A T C A/C T C/G C A C A/G/T T 
+	E-Value: 4.11e+00,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: Y W C A T C M T S C A C D T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 14: ----
+ => A/T A/T A C/G C/G T G G G G G/T 
+	E-Value: 4.18e+00,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: W W A S S T G G G G K 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 15: ----
+ => T G A/C T G T C/T G A/T A/C 
+	E-Value: 4.20e+00,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: T G M T G T Y G W M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 16: ----
+ => A/T A/C A/T A T A A A A/C/G A/C/G G A/C/T A G T A 
+	E-Value: 4.23e+00,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: W M W A T A A A V V G H A G T A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 17: ----
+ => A/T A A C A C A/G/T 
+	E-Value: 4.45e+00,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: W A A C A C D 
+	mode: 71, startRegion: 67	 endRegion: 72
+
+	----Motif Number 18: ----
+ => A/G A/C/G C/T A/G T C G A A/C A/G T C/G C/G T 
+	E-Value: 4.68e+00,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: R V Y R T C G A M R T S S T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 19: ----
+ => A/G A/T G/T A/G C/T C A/T C G/T G/T T G A/G A/T G/T 
+	E-Value: 4.75e+00,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: R W K R Y C W C K K T G R W K 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 20: ----
+ => A/C G A T G A C A/C A/C 
+	E-Value: 5.71e+00,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: M G A T G A C M M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 21: ----
+ => T T C C/G T C A/C A/C/T C 
+	E-Value: 5.74e+00,	occ: 60.00 % (12 of 20 sequences)
+	IUPAC: T T C S T C M H C 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 22: ----
+ => A G A A/T G A/G G/T A/C/T A G A/C A A/C 
+	E-Value: 6.23e+00,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: A G A W G R K H A G M A M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 23: ----
+ => G A A C/G/T A A/G/T A/G C A/T A/G A/T A/T G A A A A 
+	E-Value: 6.89e+00,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: G A A B A D R C W R W W G A A A A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 24: ----
+ => A A C/G/T G C/T G C/G/T A T C/G T A/C/T A C/G G T C/G/T 
+	E-Value: 7.61e+00,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: A A B G Y G B A T S T H A S G T B 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 25: ----
+ => A/T C C T A C/G T C/T A/C/G/T A/C/G C/G C C T C/T 
+	E-Value: 8.05e+00,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: W C C T A S T Y N V S C C T Y 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 26: ----
+ => A G A A/T G A C/G C 
+	E-Value: 1.02e+01,	occ: 45.00 % (9 of 20 sequences)
+	IUPAC: A G A W G A S C 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 27: ----
+ => C G/T A/G/T A/T C/G T G T A/G C/G/T T G T 
+	E-Value: 1.02e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: C K D W S T G T R B T G T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 28: ----
+ => A/T T A A T G T C C A/G/T 
+	E-Value: 1.04e+01,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: W T A A T G T C C D 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 29: ----
+ => A/G C C/G/T G A/C/T A/C/G/T C A/G G C/G A/C/G G A/C/G G 
+	E-Value: 1.04e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: R C B G H N C R G S V G V G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 30: ----
+ => C/G A G A/C/G/T A/G A/C/T C T G C T 
+	E-Value: 1.12e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: S A G N R H C T G C T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 31: ----
+ => C A/C C T C/G/T C/G A/C/T G/T C C A A/C 
+	E-Value: 1.26e+01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: C M C T B S H K C C A M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 32: ----
+ => C/G A A C/G A A G A/G 
+	E-Value: 1.35e+01,	occ: 70.00 % (14 of 20 sequences)
+	IUPAC: S A A S A A G R 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 33: ----
+ => G C/T G A/G A/G/T A/C/G G A/C C/T A/G A/C A/C A/C G T G G 
+	E-Value: 1.43e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: G Y G R D V G M Y R M M M G T G G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 34: ----
+ => A/G/T T A/T C C/G/T A/G/T C/G A/G A/G/T A/C/G/T A/G/T C/G/T G A/T A G A/T 
+	E-Value: 1.61e+01,	occ: 50.00 % (10 of 20 sequences)
+	IUPAC: D T W C B D S R D N D B G W A G W 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 35: ----
+ => A G T A G/T A/C/G/T A T A A/G/T 
+	E-Value: 1.61e+01,	occ: 60.00 % (12 of 20 sequences)
+	IUPAC: A G T A K N A T A D 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 36: ----
+ => A A/T A/C A/C A/C A G A A A G A G/T A G A/T A 
+	E-Value: 1.62e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: A W M M M A G A A A G A K A G W A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 37: ----
+ => C/G A G C A A A/C/G T A/C C/G A G C/G A A/G 
+	E-Value: 1.62e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: S A G C A A V T M S A G S A R 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 38: ----
+ => A A G A/C A/G G A/G A A/C/G A A G A/C/G 
+	E-Value: 1.68e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: A A G M R G R A V A A G V 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 39: ----
+ => A A C A A T C/G/T A A/C A/G/T C A A A/C/G 
+	E-Value: 1.77e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: A A C A A T B A M D C A A V 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 40: ----
+ => G A C T C/T A/G C/T T G A/T C A/G/T T A/C G/T 
+	E-Value: 1.94e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: G A C T Y R Y T G W C D T M K 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 41: ----
+ => A/C A/T T T A/T T C A T A A/T T C 
+	E-Value: 2.03e+01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: M W T T W T C A T A W T C 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 42: ----
+ => C T C A/T A/T C A/T C/T C/G A/T T C G/T C A/T A/C 
+	E-Value: 2.07e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: C T C W W C W Y S W T C K C W M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 43: ----
+ => A/C/G A A/G A T A/C A/C T T T A/G C/G A A T T T 
+	E-Value: 2.13e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: V A R A T M M T T T R S A A T T T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 44: ----
+ => G/T A/T A/G A G A/C/G G A/T C/G T T C A A/G 
+	E-Value: 2.14e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: K W R A G V G W S T T C A R 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 45: ----
+ => A/T G C G C/G 
+	E-Value: 2.25e+01,	occ: 100.00 % (20 of 20 sequences)
+	IUPAC: W G C G S 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 46: ----
+ => A/T A T A A T A T C/T A 
+	E-Value: 2.29e+01,	occ: 45.00 % (9 of 20 sequences)
+	IUPAC: W A T A A T A T Y A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 47: ----
+ => C C/T C/T T T C C A/C/G/T A/C/T C A/C/G/T C/G A/C T C C/T T 
+	E-Value: 2.36e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: C Y Y T T C C N H C N S M T C Y T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 48: ----
+ => G C G G C A/C/G C/G A/G G G G 
+	E-Value: 2.44e+01,	occ: 15.00 % (3 of 20 sequences)
+	IUPAC: G C G G C V S R G G G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 49: ----
+ => G/T C A C/T A/C/T A/C/G T A/C A/G A/C/T C T T C A 
+	E-Value: 2.52e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: K C A Y H V T M R H C T T C A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 50: ----
+ => C T A/T A/C/G/T A A/G T A A/C A/C/G/T A/C/G A/G A/T A G 
+	E-Value: 3.03e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: C T W N A R T A M N V R W A G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 51: ----
+ => A/T A C A A/T A T A/T A/T A/T A/T A C A/T C/G/T 
+	E-Value: 3.14e+01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: W A C A W A T W W W W A C W B 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 52: ----
+ => A A A G G/T A/G/T A/C/G/T G C/G A/G/T A/T A A G A 
+	E-Value: 3.18e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: A A A G K D N G S D W A A G A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 53: ----
+ => T A/T A/C/G G T C A/G T C A/G A/C/T 
+	E-Value: 3.36e+01,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: T W V G T C R T C R H 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 54: ----
+ => A/C T T G C/G A/G A/C/G G/T A/G A/C/T C/G A T G C/G 
+	E-Value: 3.42e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: M T T G S R V K R H S A T G S 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 55: ----
+ => C/T C/T A/C C T C/G C A/T C/T C A G T C G A/G C/T 
+	E-Value: 3.50e+01,	occ: 15.00 % (3 of 20 sequences)
+	IUPAC: Y Y M C T S C W Y C A G T C G R Y 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 56: ----
+ => G G G G/T T A C/T G A/T A/C A/G A G G A 
+	E-Value: 3.59e+01,	occ: 15.00 % (3 of 20 sequences)
+	IUPAC: G G G K T A Y G W M R A G G A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 57: ----
+ => G G C/T C A/G/T A/C G C C 
+	E-Value: 3.73e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: G G Y C D M G C C 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 58: ----
+ => A C T T G/T A G C A/C C T A/G/T 
+	E-Value: 4.00e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: A C T T K A G C M C T D 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 59: ----
+ => G/T A/C C/G A G C/G A G A/C 
+	E-Value: 4.04e+01,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: K M S A G S A G M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 60: ----
+ => G/T C A T C G 
+	E-Value: 4.23e+01,	occ: 65.00 % (13 of 20 sequences)
+	IUPAC: K C A T C G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 61: ----
+ => C/T G/T G T C/T T C/G/T A/C/T G A/C/T C A/C/T A C/G/T T G T 
+	E-Value: 4.31e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: Y K G T Y T B H G H C H A B T G T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 62: ----
+ => G A/T C T G C/T G C/G 
+	E-Value: 4.43e+01,	occ: 40.00 % (8 of 20 sequences)
+	IUPAC: G W C T G Y G S 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 63: ----
+ => A/G T T A/C G C T A/C/G A 
+	E-Value: 4.66e+01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: R T T M G C T V A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 64: ----
+ => C/T G T A/C/G/T G/T C A/T T T A/T T A/C A/G A/C/G/T A C A/G 
+	E-Value: 5.01e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: Y G T N K C W T T W T M R N A C R 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 65: ----
+ => A G/T C A/G A/G A A G/T C A/G 
+	E-Value: 5.23e+01,	occ: 50.00 % (10 of 20 sequences)
+	IUPAC: A K C R R A A K C R 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 66: ----
+ => G A T A T G 
+	E-Value: 5.53e+01,	occ: 60.00 % (12 of 20 sequences)
+	IUPAC: G A T A T G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 67: ----
+ => T G/T A/C/T A/T T T G/T T G T A/C/T A/G/T T T G/T T T 
+	E-Value: 5.66e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: T K H W T T K T G T H D T T K T T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 68: ----
+ => C/G C T G C/T T A/C A/C T G 
+	E-Value: 5.68e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: S C T G Y T M M T G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 69: ----
+ => A/C C/T A/C/T T C T A T C/T A/C/T A/G C/G G/T G C T 
+	E-Value: 5.89e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: M Y H T C T A T Y H R S K G C T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 70: ----
+ => A/C/G/T A G G/T T C/G A/G/T A/G A/G A/C/G A G G C/T A/G/T C/G 
+	E-Value: 6.11e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: N A G K T S D R R V A G G Y D S 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 71: ----
+ => T A A G A/C/T A/G A A/T A/C A/C/G/T A/C/T G A A T A C 
+	E-Value: 6.49e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: T A A G H R A W M N H G A A T A C 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 72: ----
+ => C/G C/T C/G C/G A T C A/C C/T G A T C/G C/G C/G G 
+	E-Value: 6.91e+01,	occ: 15.00 % (3 of 20 sequences)
+	IUPAC: S Y S S A T C M Y G A T S S S G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 73: ----
+ => T C A C G T C/G/T A A/C/G/T A/C/G/T T G A/C A/T 
+	E-Value: 7.08e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: T C A C G T B A N N T G M W 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 74: ----
+ => T C/G/T C/T A/C C/T A T G/T C/T C/T T G A T A/G G 
+	E-Value: 7.09e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: T B Y M Y A T K Y Y T G A T R G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 75: ----
+ => A G G G/T C/G A/T G A/T A/G/T A/T A/T A/G/T A/C A/G/T A/G G G 
+	E-Value: 7.18e+01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: A G G K S W G W D W W D M D R G G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 76: ----
+ => C/G/T C/T A T A/T A T T A T A C A A/T A 
+	E-Value: 7.68e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: B Y A T W A T T A T A C A W A 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 77: ----
+ => A A A/C/G/T C/G T A C T G/T A/G/T G/T G C A A/G/T 
+	E-Value: 7.76e+01,	occ: 30.00 % (6 of 20 sequences)
+	IUPAC: A A N S T A C T K D K G C A D 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 78: ----
+ => T G G/T G G/T A/G A C A A G 
+	E-Value: 7.79e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: T G K G K R A C A A G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 79: ----
+ => T G A/G C C A A/T A/C/G G/T 
+	E-Value: 7.81e+01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: T G R C C A W V K 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 80: ----
+ => A/G A/T T C C/G A C T C C/G A/G A/G/T 
+	E-Value: 8.03e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: R W T C S A C T C S R D 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 81: ----
+ => A G G C C/G A/G/T C/G A/C A/G/T C/T A/G C C A/T G/T A/G 
+	E-Value: 8.14e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: A G G C S D S M D Y R C C W K R 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 82: ----
+ => G C G/T C/G/T A/C/T T C/T T A/C/T C/G C/T A/C/G T C/G G C G/T 
+	E-Value: 8.31e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: G C K B H T Y T H S Y V T S G C K 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 83: ----
+ => C A C C/G A/T G/T C/G C/G/T A/C/T C A/G A/C/T C/G G T 
+	E-Value: 8.43e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: C A C S W K S B H C R H S G T 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 84: ----
+ => C T A/G A/C A/G/T C/G T A/C A/G/T A C/T A/G G/T C T A A/C/G 
+	E-Value: 8.53e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: C T R M D S T M D A Y R K C T A V 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 85: ----
+ => A G A G G/T 
+	E-Value: 8.62e+01,	occ: 100.00 % (20 of 20 sequences)
+	IUPAC: A G A G K 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 86: ----
+ => T T G T A A/C T G/T T C/T A/C/T A/T A A/T A/T A A/C 
+	E-Value: 8.71e+01,	occ: 35.00 % (7 of 20 sequences)
+	IUPAC: T T G T A M T K T Y H W A W W A M 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 87: ----
+ => A/G T T A G T T A/T T A A/C/T A/G/T A/G A/G/T A C C/T 
+	E-Value: 8.84e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: R T T A G T T W T A H D R D A C Y 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 88: ----
+ => G C/G C G C C/T C/G C/T A/G/T 
+	E-Value: 9.03e+01,	occ: 25.00 % (5 of 20 sequences)
+	IUPAC: G S C G C Y S Y D 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 89: ----
+ => A/T T T C T G G G/T A A A/T A/G A C/T A/G G/T 
+	E-Value: 9.07e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: W T T C T G G K A A W R A Y R K 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 90: ----
+ => G A/G G G G 
+	E-Value: 9.84e+01,	occ: 70.00 % (14 of 20 sequences)
+	IUPAC: G R G G G 
+	mode: -, startRegion: -	 endRegion: -
+
+	----Motif Number 91: ----
+ => A/G A/C/T G G A/T A/C/T A A/T C C C/G C G/T 
+	E-Value: 9.99e+01,	occ: 20.00 % (4 of 20 sequences)
+	IUPAC: R H G G W H A W C C S C K 
+	mode: -, startRegion: -	 endRegion: -

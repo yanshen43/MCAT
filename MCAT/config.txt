@@ -1,0 +1,5 @@
+tool:WEEDER
+-b=3
+tool:DECOD
+-niter=50
+-c=20

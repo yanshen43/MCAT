@@ -1,0 +1,5 @@
+#actual test should run Weeder
+MotifSearcher	dynamit.memeSearcher.MEMESearcher	/home/ccogs/meme/bin/	-oc ./meme_out -nmotifs 3 -w 12 -dna 
+MotifSearcher	dynamit.gibbsSearcher.GibbsSearcher	/home/ccogs/gibbs/	12 expect
+IntegrationStrategy	dynamit.miStrategy.MIStrategy	path	0.1
+ResultsPrinter	dynamit.tablePrinter.TablePrinter	path	params

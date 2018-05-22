@@ -1,0 +1,299 @@
+#!/bin/bash
+
+###
+### prepare output directory
+### runXXmotif binary
+### generate PWM logos
+###
+runXXmotif() {
+	rm -rf "$1/tmp"
+	mkdir -p "$1/tmp"
+	"$MYPATH/Release/XXmotif" "$@" #2>&1
+	mf_exitstatus=$?
+	if [ $GRAPHICS -eq 0 ]; then
+		exit ${mf_exitstatus}
+	fi
+	if [ ${mf_exitstatus} -eq 0 ]; then
+		BLOCKS=`ls "$1/tmp" | grep -e '.blocks'`
+		if [ ! -z "$BLOCKS" ]; then
+			for i in "$1/tmp/"*.blocks; do
+				if [ "$AA" ]; then
+					$WEBLOGO -f "$i" -o "$i.$FORMAT" \
+						-Y no -y "" -X no -x "" -P "" --errorbars no -F $FORMAT \
+						--color '#00C000' WYF WYF \
+						--color '#FFFF00' C C \
+						--color '#6080FF' DE DE \
+						--color '#02FF02' LIVM LIVM \
+						--color '#FF0000' KR KR \
+						--color '#E080FF' QN QN \
+						--color '#FF8000' H H \
+						--color '#A0A0A0' P P \
+						--color '#000000' GAST GAST \
+						--color '#FF789E' Z Z \
+						-H 100 --composition none\
+					&>/dev/null
+					pdfcrop "$i.pdf" &>/dev/null
+					sleep 10 # problems on cn15 (NFS?)
+					mv "$i-crop.pdf" "$i.pdf"
+# 				else
+# 					$WEBLOGO -f "$i" -o "$i.$FORMAT" \
+# 						-Y no -y "" -X no -x "" -P "" --errorbars no -F $FORMAT \
+# 						-A dna -c classic -s large -H 100 --composition none\
+# 					&>/dev/null
+# 					convert "$i.png" "$i.pnm";
+				fi	
+			done
+		fi
+		if [ ! "$AA" ]; then
+			cd "$1"
+			R_ARGS="--slave -f tmp/plotDistribution.R --args ."
+			R $R_ARGS
+			cd - > /dev/null
+		fi
+	else
+		exit ${mf_exitstatus}
+	fi
+	#rm -rf "$1/tmp"
+}
+
+###
+### Usage message
+###
+usage() {
+	"$MYPATH/Release/XXmotif" 2>&1
+	echo -e "\n"
+	cat << EO
+Usage: $PROGNAME OUTDIR SEQFILE [options]
+
+	Wrapper script around XXmotif binary.
+
+	Options: (all other options are passed to the binary, see above)
+EO
+
+	cat << EO | column -s\& -t
+
+		--XXmasker & mask the input sequences for homology, repeats and low complexity regions
+		--XXmasker-pos & mask only the positive set for homology, repeats and low complexity regions
+		--no-graphics & run XXmotif without graphical output
+		-h|--help & show this output
+		&
+EO
+}
+
+#echo -e "Current path: $USER@`hostname`:`pwd`" >&2
+#echo -e "Arguments:    $@"
+
+### process arguments
+PROGNAME=${0##*/}
+
+MYPATH=`which $0`
+#resolve symbolic link
+while [ -h "$MYPATH" ]; do
+	 ls=`ls -ld "$MYPATH"`
+   MYPATH=`expr "$ls" : '.*-> \(.*\)$'`	 
+done
+MYPATH=${MYPATH%/*}
+GRAPHICS=1
+ARGCOUNT=1
+while [ -n "$1" ]; do
+	case $1 in
+	--aa)
+		AA=1
+		OPTIONS="$OPTIONS $1"
+		;;
+	--debug)
+		DEBUG="--debug"
+		#DEBUGMASKER="--debug"
+		OPTIONS="$OPTIONS $1"
+		;;
+	--format)
+		if [ "$2" = "MFASTA" ]; then
+			HF_EXTRA_OPTS="$HF_EXTRA_OPTS --multAli"
+		fi
+		OPTIONS="$OPTIONS $1 $2"
+		shift
+		;;
+	-h|--help)
+		usage
+		exit 0
+		;;
+	--XXmasker)
+		HOMOFILTER=1
+		;;
+	--XXmasker-pos)
+		HOMOFILTERPOS=1
+		;;
+	--no-graphics)
+		GRAPHICS=0
+		;;
+	--mtf-file)
+		MTFOPT="$1 $2"
+		shift
+		;;
+	--batch)
+		HF_EXTRA_OPTS="$HF_EXTRA_OPTS $1"
+		OPTIONS="$OPTIONS $1"
+		;;
+	--negSet)
+		NEGSET="$2"
+		shift
+		;;
+	*)
+		if [ "$ARGCOUNT" = 1 ]; then
+			OUTMAIN=$1
+			OUTMAIN=${OUTMAIN%/}
+		elif [ "$ARGCOUNT" = 2 ]; then
+			SEQFILE=$1
+		else
+			OPTIONS="$OPTIONS $1"
+		fi
+		;;
+	esac
+	shift
+	ARGCOUNT=`expr "$ARGCOUNT" + 1`
+done
+SEQBASE=${SEQFILE##*/}
+SEQBASE=${SEQBASE%.*}
+
+if [[ `grep 'Scientific Linux' /etc/redhat-release 2>/dev/null` ]]; then
+	source /etc/profile
+	module load perl
+	module load R
+fi
+
+if [ $GRAPHICS -eq 1 ]; then
+	if [ "$AA" ]; then
+		FORMAT=pdf
+		WEBLOGO=`which weblogo`
+		if [ -z "$WEBLOGO" ]; then
+			echo -e "\nError: weblogo not installed, no graphical output can produced\n\t install weblogo or use option --no-graphics" >&2;
+			echo -e "\tif your operating system is ubuntu, write \"sudo apt-get install python-setuptools\"" >&2
+			echo -e "\t\t\"sudo easy_install corebio\"" >&2;
+			echo -e "\t\t\"sudo easy_install weblogo\"" >&2;
+			exit 1;
+		fi
+	else
+		FORMAT=png
+		if [ -z "`which R`" ]; then 
+			echo -e "\nError: R not installed, no graphical output can be produced\n\t install ImageMagick or use option --no-graphics" >&2; 
+			echo -e "\tif your operating system is ubuntu, write \"sudo apt-get install r-base\"" >&2
+			exit 1;
+		fi
+		RES=`R -e "library(grid)" 2>&1 >/dev/null`
+		if [ ! -z "$RES" ]; then
+			echo -e "Warning: grid library not installed in R"
+			echo -e "\twrite within R: install.packages(\"grid\")"
+		#	exit 1;
+		fi	
+	fi
+fi
+
+if [ -z "$OUTMAIN" ]; then
+	echo -e "\n!!! no OUTDIR given !!!"
+	usage
+	exit 1
+elif [[ ${OUTMAIN:0:1} == '-' ]]; then
+	echo -e "\n!!! no OUTDIR given !!!"
+	usage
+	exit 1
+elif [ -z "$SEQFILE" ]; then
+	echo -e "\n!!! no SEQFILE given !!!"
+	usage
+	exit 1
+elif [[ ${SEQFILE:0:1} == '-' ]]; then
+	echo -e "\n!!! no SEQFILE given !!!"
+	usage
+	exit 1
+else
+	mkdir -p "$OUTMAIN/tmp"
+	rm -rf "$OUTMAIN/tmp/*"
+fi
+
+###
+### locate needed executables
+###
+MF_EXE="$MYPATH/Release/XXmotif"
+if [ ! -x "$MF_EXE" ]; then echo "Error: XXmotif executable not found. Goto Release folder and type \"make -j\"" >&2; exit 1; fi
+
+if [ $HOMOFILTER ] || [ $HOMOFILTERPOS ]; then
+	if [ "$AA" ]; then
+		HF_EXE="$MYPATH/XXmasker/XXmasker_aa.pl"
+	else
+		HF_EXE="$MYPATH/XXmasker/XXmasker.pl"
+	fi
+	if [ ! -x "$HF_EXE" ]; then
+		echo "Error: homology filter executable not available, should be $HF_EXE" >&2
+		exit 1
+	fi
+	if [ -z "$BLAST_DIR" ]; then
+		BLAST_EXE=`which blastall`
+		BLAST_DIR=${BLAST_EXE%blastall}
+	fi
+	if [ -z "$BLAST_DIR" ]; then
+		echo "No environment variable BLAST_DIR defined, and unable to locate BLAST executables in PATH."
+		echo "Install \"blastall\" or start XXmotif without option \"--XXmasker\""
+		exit 1
+	fi
+	HF_EXE="$HF_EXE --blastdir $BLAST_DIR"
+fi
+
+###
+### run homology filter if requested
+###
+if [ $HOMOFILTER ] || [ $HOMOFILTERPOS ]; then
+	if [ $AA ]; then
+		# needed on nodes running under Scientific Linux
+#       if [[ `grep 'Scientific Linux' /etc/redhat-release 2>/dev/null` ]]; then
+#          source /etc/profile
+#          module load perl
+#       fi
+		FILTERED="'$OUTMAIN/negset_filtered_$SEQBASE.fasta'"
+		HF_ARGS="-d '$SEQFILE' -o '$FILTERED' '$NEGSET' $DEBUGMASKER"
+		#echo "Running XXmasker: $HF_EXE $HF_ARGS"
+		eval "$HF_EXE" $HF_ARGS
+		mf_exitstatus=$?
+		if [ ${mf_exitstatus} -ne 0 ]; then
+			exit ${mf_exitstatus};
+		fi
+		NEGSET="$FILTERED"
+	else
+		POS_FILTERED="$OUTMAIN/${SEQBASE}_pos_hf.fasta"
+		HF_ARGS="--outfile '$POS_FILTERED' $HF_EXTRA_OPTS $DEBUGMASKER '$SEQFILE'"
+		#echo "perl -I"$MYPATH/XXmasker/lib" $HF_EXE" $HF_ARGS
+		eval perl -I"$MYPATH/XXmasker/lib" "$HF_EXE" $HF_ARGS
+		mf_exitstatus=$?
+		if [ ${mf_exitstatus} -ne 0 ]; then
+			exit ${mf_exitstatus};
+		fi
+		SEQFILE="$POS_FILTERED"
+		if [ $NEGSET ] && [ ! $HOMOFILTERPOS ]; then
+			NEGBASE=${NEGSET##*/}
+			NEGBASE=${NEGBASE%.*}
+			NEG_FILTERED="$OUTMAIN/${NEGBASE}_neg_hf.fasta"
+			HF_ARGS="--outfile '$NEG_FILTERED' $HF_EXTRA_OPTS $DEBUGMASKER '$NEGSET'"
+			#echo "HF_EXE" $HF_ARGS
+			eval perl -I"$MYPATH/XXmasker/lib" "$HF_EXE" $HF_ARGS
+			mf_exitstatus=$?
+			if [ ${mf_exitstatus} -ne 0 ]; then
+				exit ${mf_exitstatus};
+			fi		
+			NEGSET="$NEG_FILTERED"
+		fi
+	fi
+fi
+
+
+
+###
+### run motif finder
+###
+if [ "$NEGSET" ]; then
+	OPTIONS="$OPTIONS --negSet '$NEGSET'"
+fi
+# if [ $HOMOFILTER ] && [ ! $AA ]; then
+# 	OPTIONS="$OPTIONS --lcf"
+# fi
+
+MO_ARGS="'$OUTMAIN' '$SEQFILE' $MTFOPT $OPTIONS"
+#echo "runXXmotif $MO_ARGS"
+eval runXXmotif $MO_ARGS

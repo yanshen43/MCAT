@@ -1,0 +1,69 @@
+Tasks:
+Scoring:
+	Get working pvalue generator
+	Integrate into pipeline
+    qfast implemented, seems to be working?
+Combining:
+	Any new ideas?
+	Integrate into pipeline
+    Done! (unless anyone has a better idea)
+Testing:
+	Generate datasets
+	Find best/worst performance of MCAT with synth data
+	Find best/worst performance of other pipelines (EMD, any others?)
+Visualization:
+    Ensure correct scores are being displayed
+    Make # of results visualized a command line parameter
+    Done!
+Other:
+	weeder needs freq files generated from genome
+		is this user's responsibility, or can any of it be automated?
+        User's responsibility, make sure we mention that.
+Writing:
+	Scoring - Jake/Zhen/Yanshen
+	Combining - Jeff (unless we use someone else's better idea)
+	Testing:
+		seq_gen - Jake
+		YEASTRACT - Jeff
+		other pipelines - Christy/Yanshen
+		Synth or other test results - everyone
+    Discussion - everyone (model after other ensemble papers?)
+	Reviewing/editing - everyone
+
+Timeline:
+March 20
+Zhen (and Yanshen?): Report on MAST/pval usage
+Christy: Report on other pipelines
+Jake: Report on current p-value calculations, anything new with synth data generator?
+Jeff: Report on combineMotifs results and automated synth data runner and tester
+
+March 27
+Christy: Bioinformatics journal chosen (anything else about this?), results from testing with EMD
+Jake: Changes to pval
+Jeff: integration of combine method, writing
+Yanshen: Testing, writing
+Zhen: MAST/qfast integration
+
+April 3
+Jeff: bug fixes, added # of motifs to vis as command line param, added check for sequences with dup names
+Jake/Zhen: Finished? implementing and integrating qfast in pipeline
+Yanshen: Testing (working with old tools)
+
+Scoring method chosen and integrated
+Writing
+
+April 10
+Testing
+Writing
+
+April 17
+Testing
+Writing
+Reviewing/editing
+
+April 24
+Reviewing/editing
+
+May 1
+Everything done
+Paper submitted

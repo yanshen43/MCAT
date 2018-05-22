@@ -1,0 +1,24 @@
+
+To run the weblogo tool, first the Ghostscript program must be installed
+
+To do this, simply run the following commands:
+
+1. tar -zxf ghostscript-9.19.tar.gz
+2. ./configure (in the directory where you unzipped the files)
+3. sudo make install (in the directory where you unzipped the files)
+
+The only change needed to be made in the weblogo configuration is to
+rename the configuration file from logo.conf.init to logo.conf, if
+this is not already done. The file paths present in the conf file
+will work with the installation process described above.
+
+Once ghostscript is setup, you can run the weblogo tool (again,
+from the directory where it is unzipped; otherwise, simply
+change the preceding file path from ./ as appropriate) 
+with the following command line:
+
+./seqlogo -F PNG -c -f cap_binding_sites.txt > cap.png
+
+The file referenced above, cap_binding_sites.txt, is provided as an example 
+of the input format.
+

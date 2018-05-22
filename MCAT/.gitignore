@@ -1,0 +1,11 @@
+results/*
+testResults/*
+testFiles/*
+bp_files/*
+*.pyc
+*.instances
+*.png
+*.log
+*.class
+*.swp
+*.pdf

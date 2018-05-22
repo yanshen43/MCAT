@@ -1,0 +1,2 @@
+For whatever reason, I could not get this to link statically, and could only get it to compile dynamically. This can be done by removing the -static flag from the g++ compile line under XXmotif in the makefile in Release.
+Additionally, if you get compile errors about 'conversion from int', you can ignore these by removing the -Wconversion flag from the g++ line in all subdir.mk files under src.

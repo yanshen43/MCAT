@@ -1,0 +1,201 @@
+******************************************************
+Overview:
+
+BioProspector
+Release 2. Feburary 2004
+A DNA seqence motif finding program.
+
+Reference
+Liu X, Brutlag DL, Liu JS. BioProspector: discovering conserved DNA motifs
+in upstream regulatory regions of co-expressed genes. Pac Symp Biocomput. 
+2001;:127-38.
+
+BioProspector is free to academia. Please do not distribute the executable
+of the program to others without a license or consent of the owners. For 
+details about obtaining this program, please refer to:
+http://motif.stanford.edu/distributions/
+
+******************************************************
+Start Using BioProspector:
+
+Once you download and unzip BioPropsector.2004.zip, you will see several files:
+BioPropsector.xxx (xxx the platform of BioPropsector executables)
+genomebg.xxx (genomebg can calculate the genome base distribution)
+BioProspector.2004.README
+ConvertFASTA.pl 
+
+First make the program run, say you are under a Mac OSX xterm, type:
+mv BioProspector.mac BioPropsector
+chmod 555 BioProspector
+
+If you need to run genomebg.xxx under Linux, do:
+mv genomebg.linux genombg
+chmod 555 genomebg
+
+Note: if you need to run it under windows with Cygwin, you need to do:
+mv BioProspector.cygwin BioProspector.exe
+
+Now you can run the program by typing:
+./BioProspector 
+As you see, typing the program without any parameters gives you a short 
+list on how to set parameters.
+
+******************************************************
+Input Sequences:
+
+The following shows the details about parameter specification:
+Usage: ./BioProspector -i seqfile (options) 
+
+The input sequence should be in a plain text file, not in word or html.
+Right now, the program only recogonize restricted FASTA format:
+>sequence1 name
+ATGGTGACGAC sequence1 as ONE LINE
+>sequence2 name
+GTAGCCTCATG sequence2 as ONE LINE
+
+If you have the following sequence format:
+>seq1
+ATCTGAATGCA
+AGCTGCACACGTTTTT
+CAGATAAA
+
+>seq2
+AGTCAGACTACA
+AGCTGCACACTTTT
+CAGATAAA
+
+>seq3
+1 AGTCG GTCAC GCACG CACAC 20
+21 CGATT CAAAT TGTGA CGACG 40
+
+You can use ConvertFASTA.pl to convert your input into the format 
+BioProspector takes. To run this program, type:
+perl convertFASTA.pl < input > input.new
+
+input.new will have the sequences converted into the right format.
+
+******************************************************
+Description of optional parameters
+  -W    <motif width (default 10)>
+	For one-block motif or the first block of a two-block motif. 
+	Allowed -W range is [4, 50]. 
+	
+  -o    <output file (default stdout)>
+
+  -f    <background distribution file (default seqfile)>
+	Precomputed background distribution (to speed up the program), 
+	which can be obtained by running the included program
+	genomebg. Included are pre-computed yeast whole genome and yeast
+	intergenic sequence distribution.
+	To run genomebg, type:
+	./genomebg -i inputSequenceFile -o outputDistributionFile
+	InputSequenceFile contains whole genome (or just intergenic) sequences
+	in the same restricted FASTA format. The outputDistributionFile is 
+	the one you can use on BioProspector by specifying -f. 
+
+  -b    <background sequence file (default input sequences)>
+	If you want to use another sequence file which contains sequences
+	that represent the background. Should be the same format as
+	seqfile. 
+
+  -n    <number of times trying to find motif (default 40)>
+	BioProspector reinitializes the program for certain number of
+	times to avoid local maxima, and only reports the top ones among
+	the -n tries. Allowed -n range is (0, 200].
+
+  -r    <number of top motifs to report (default 5)>
+	The best -r motifs among the -n try are reported at the end. 
+	Allowed -r range is (0, n]. 
+
+  -w    <second motif block width for two-block motif (default 0)>
+	Do not specify this for one-block motifs. Allowed -w range is [4, 50].
+	
+  -p 1  [if two-block motif is palindrome (default 0)]
+	Palindromes are two-block motifs, and the two blocks should set to
+	be the same length. Otherwise, BioProspector uses the average of
+	blk1 and blk2 width as the width for both motif blocks. If a motif
+	of wid is a one block palindrome (e.g. ATTGGATCCAAT), then specify
+	-W and -w to be each of wid/2 long with -G and -g to be 0. 
+
+  -G    <max gap between two motif blocks (default 0)>
+	This should only be set if -W and -w are both set (i.e, only set
+	this for two-blk motifs). Allowed -G range is [0, 50].
+
+  -g    <min gap between two motif blocks (default 0)>
+	This should only be set if -W and -w are both set. Allowed -G
+	range is [0, 50]. Also (G - g) should be smaller than 20. E.g. 
+	-G 50 -g 35 is OK, but -G 30 -g 5 is not. 
+
+  -d 1  [if only need to examine forward (default 2)]
+	BioProspector automatically checks both forward and backward
+	strands, so only specify this if you want the program the check
+	only the forward strand.
+
+  -a 1  [if every sequence contains the motif (default 0)]
+
+  -h 1  [if want more degenerate sites (default fewer sites)]
+	If the motif is very degenerate and you want to get more sites,
+	then specify "-h 1 " which will do a final refinement which allows
+	more generate sites to be put in the motif. Default is motif 
+	finding without refinement step.
+
+  -e	<expected base per motif site in input sequences (don't specify if
+	unknown)>
+	If you expect to see one site every 1000 bases, then you can specify
+	-e 1000. Of course, most of the time we don't know how frequent the 
+	motif occurs (we don't even know what it is), in which case don't 
+	specify -e at all.
+
+Example 1
+    ./BioProspector -i inseq -b backseq -o out &
+    ==> find motif of width 10 from inseq (restricted FASTA). Search
+	motifs from both DNA strands. Use sequences in backseq as the
+	background base distribution. Output the best 10 motifs to to 
+	out and run the program in background (&). You could start checking 
+	result (or progress of the program) with "more out" or "less out" 
+	while program is still running. 
+
+Example 2
+    ./BioProspector -i inseq -W 15 -f yeast_all.bg -n 100 -r 20 -d 1 -a 1 -h 1 -o out
+    ==> find motif of width 15 from sequence file inseq (restricted
+	FASTA), use yeast genome as the background distribution and search
+	forward strand. Try motif finding 100 times, and report the best
+	20. Every sequence should contain at least one site for each 
+	motif, and automatically refine the motif after convergence.
+	Print the output in file out.
+
+******************************************************
+Output format:
+
+1. BioProspector tries -n times (re-initialize) to look for motifs, and
+    prints out the motif found at each try in the following format:
+    Try #, motif score, consensus of blk1, reverse consensus of blk1,
+    consensus of blk2, reverse consensus of blk2, total number of aligned 
+    sites. 
+   If you specified a motif refinement, then after each Try, a second line
+    Ref # is also printed.
+
+2. The highest -r motifs among -n tries.
+ 1) Motif width (blk 1, blk 2); Gap range [minGap, maxGap]; Motif score; 
+    number of aligned sites. 
+ 2) Motif probability matrix (one line per motif column), Consensus,
+    Reverse Consensus, Degenerate, Reverse degenerate, all in transfac
+    format.
+ 3) Sequence alignment in fASTA format: sequence name, length, site number 
+    in the sequence, starting alignment position of site (r 53 means position 
+    53 (from left to right) in reverse direction, f 47 is forward direction 
+    position 47). Based on the sequence length, and site starting position 
+    relative to its beginning (5' end), you can easily calculate the site 
+    distance to its end (3'end, which might be transcription start site), 
+    and the sequence of the aligned site. 
+    You can cut out this alignment and paste it into:
+	http://weblogo.berkeley.edu/logo.cgi
+    to get the sequence logo of the motif.
+
+******************************************************
+Contact information:
+
+For questions, requests and bug report:
+please contact X. Shirley Liu at xsliu@jimmy.harvard.edu.
+
+******************************************************

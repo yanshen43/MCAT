@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+
+\addtolength{\textwidth}{1.0in}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textheight}{1.0in}
+\addtolength{\topmargin}{-0.5in}
+
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+
+\title{\texttt{seq\_gen.py}: a Synthetic Sequence Generator for the MCAT Pipeline}
+
+\author{Jake Martinez}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Determining the effectiveness of a motif-finding pipeline is not easy when the "correct" result is unknown. For this purpose, we have developed a sequence generation program that creates synthetic biological sequences from a set of input parameters. These input parameters can be tweaked to simulate a genome that is statistically similar to a target genome. Alternatively, the software can be used to modify certain characteristics of the embedded motif to find specific shortfalls of the motif-finding pipeline, regardless of genome context.
+
+\section{Methods}
+The sequence generator a large number of possible input parameters to enable a high degree of customization for the generated genetic information. After processing some of the input parameters, an initial set of sequence data $S$ is generated. The specified number of motifs are then generated and embedded within randomized sequences within $S$. During the embedding, a parameterized amount of error can be introduced into the motif to simulate single-nucleotide polymorphisms. Additionally during the embedding process, meta data describing the motif location, sequence, and error are collected to then be used in the generation of each sequence name in the modified set of sequence data $S'$.
+
+\subsection{Initial Sequence Generation}
+Prior to generation of the initial sequence, a model for describing base pair probabilities is created. This model may be created in one of four ways (listed in order of priority): 
+
+\begin{enumerate}
+	\item Template Sequence File: Uses a specified sequence file to generate a Markov model
+	\item Markov Probability File: Loads a Markov model from a file \footnote{format described in Appendix B}
+	\item Background Probability File: Loads a background probability model from a file\footnote{format described in Appendix B}
+	\item Default Background Probability Model: Uses the background model $P(X)=.25$ where $X\in\{A,T,C,G\}$
+\end{enumerate}
+
+Once the statistical model is established, the sequence generator then uses input parameters for the number of sequences to generate as well as the length for each sequence. Currently, there is no variation in sequence length between sequences but could potentially be added in the future. The generator then creates sequences, embedding motifs after each sequence is generated.
+
+\subsection{Motif Sequence Generation and Embedding}
+In order to allow a high degree of customization, input parameters for motif width, minimum and maximum starting location, as well as the probability that a motif exists in each sequence have been included in the sequence generation tool. Additionally, the number of distinct motifs present within any of the given sequences can also be specified by the user. This tool currently uses the same statistical model used to create sequences to create motifs. One key difference between motif and background sequence generation is the potential for SNPs (or other errors) within the motif. The maximum number of allowed errors in a motif can be specified as a parameter as well as the probability that an error will exist in a given motif.
+
+\subsubsection{Probability of Error Existing in a Motif}
+During the embedding process of a motif, the motif can be altered slightly to simulate SNPs or other sources of error. To determine whether an error exists, a random value $r$ between 0 and 1 is generated; if that value is less than the probability that an error exists, then an error is introduced into the sequence. To introduce the error, a random index within the motif is selected and then the base pair is replaced with another. For motifs that allow multiple errors, the index of each error is stored as to not add an error in the same location as a previously generated error.
+
+\section{Discussion}
+There are many possible uses for this tool in the analysis of a motif-finding pipeline. A series of experiments could be created to analyze the effectiveness of the pipeline with respect to each of the input parameters. For example, a set of ten sequence files could be created, each with differing values for the probability that a motif is present in the sequence (and constant values for all other parameters). This would allow the experimenter to establish certain thresholds of accuracy for each parameter to discover the potential limitations of the pipeline. Furthermore, this method of experimentation and establishing thresholds could be used as an alternative metric for measuring the robustness of the pipeline. \\
+\indent In addition to the features already implemented in the pipeline, potential improvements could include the option to have multiple of the same motif within each sequence as well as variable sequence length.
+
+
+\section{Appendicies}
+\subsection*{Appendix A: Input Parameters Reference}
+\begin{itemize}
+	\item \texttt{-w}: motif width; expects an integer value (default=8)
+	\item \texttt{-N}: number of sequences; expects an integer value (default=20)
+	\item \texttt{-n}: sequence length; expects an integer value (default=100)
+	\item \texttt{-P}: probability the motif is present in the sequence; expects a decimal value less than or equal to 1 (default=8)
+	\item \texttt{-e}: maximum number of SNPs allowed in a motif; expects an integer value (default=0)
+	\item \texttt{--eprob}: probability of a SNP existing in the motif; expects a decimal value less than or equal to 1 (default=0.65)
+	\item \texttt{--maxloc}: max starting location for motifs; expects an integer value, -1 denotes the end of the sequence (default=-1)
+	\item \texttt{--minloc}: min starting location for motifs; expects an integer value (default=0)
+	\item \texttt{--nmotifs}: max number of distinct motifs in a single sequence; expects an integer value (default=1)
+	\item \texttt{--nsites}: max number of appearance of the motif in a single sequence; expects an integer value (default=1) [NOT IMPLEMENTED]
+	
+	\item \texttt{--dyad}: sets the generator to spaced dyad mode, overrides nmotifs (nmotifs=2); motif width option now represents total combined width of dyad
+	\item \texttt{--negative}: sets the generator to negative sequence mode, overrides nmotifs (nmotifs=0)
+	
+	\item \texttt{--template}: specifies the template sequence file path; expects a string
+	\item \texttt{--markov}: specifies the Markov probability file path; expects a string
+	\item \texttt{--bgprob}: specifies the background probability file path; expects a string
+	
+	\item \texttt{-o}: output filename; expects a string value
+	\item \texttt{--dir}: output directory; expects a string value (default=''; i.e. current directory)
+\end{itemize}
+
+\subsection*{Appendix B: Markov \& Background Probability File Formats}
+
+\subsubsection*{Markov File Format}
+\begin{verbatim}
+P(A|A) = .25
+P(T|A) = .25
+P(C|A) = .25
+P(G|A) = .25
+
+P(A|T) = .25
+P(T|T) = .25
+P(C|T) = .25
+P(G|T) = .25
+
+P(A|C) = .25
+P(T|C) = .25
+P(C|C) = .25
+P(G|C) = .25
+
+P(A|G) = .25
+P(T|G) = .25
+P(C|G) = .25
+P(G|G) = .25
+\end{verbatim}
+
+\textit{Note: each grouping should add up to 1, otherwise the model will be invalid and not be loaded.}
+
+
+\subsubsection*{Background Probability File Format}
+\begin{verbatim}
+A = .25
+T = .25
+C = .25
+G = .25
+\end{verbatim}
+
+\textit{Note: all values should add up to 1, otherwise the background model will be invalid and not be loaded.}
+
+\subsection*{Appendix C: Example Uses of the Sequence Generator}
+
+\begin{itemize}
+	\item \texttt{python \textit{path}/seq\_gen.py} : runs the program with all default values
+	\item \texttt{python \textit{path}/seq\_gen.py -w 12 -N 20 -n 250} : generates 20 sequences, each 250 base pairs long, with a motif width of 12
+	\item \texttt{python \textit{path}/seq\_gen.py -e 2 --eprob .23 -P .85} : generates the default number of sequences at the default length; each sequence only has a 85\% chance of containing a motif, and each motif has a maximum of of 2 possible SNPs which have a 23\% chance of being generated
+	\item \texttt{python \textit{path}/seq\_gen.py -o seq01.fasta --dir sequences} : runs the program with all default values except changes the output directory to the "sequences" directory and changes the output filename to "seq01.fasta" (i.e. \textit{path}/sequences/seq01.fasta)
+\end{itemize}
+
+\end{document}

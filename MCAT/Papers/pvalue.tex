@@ -1,0 +1,191 @@
+\documentclass[12pt]{article}
+
+\addtolength{\textwidth}{1.0in}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textheight}{1.0in}
+\addtolength{\topmargin}{-0.5in}
+
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+
+\title{$p$-Value Computations within the GASP Pipeline}
+
+\author{Jake Martinez}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In any given motif finding pipeline, scoring methods for the results generated are essential to
+analysis and evaluation of the pipeline's effectiveness. In this paper, we will explore the
+various proposed methods for computing $p$-values.
+
+
+\section{Methods}
+In order to calculate $p$-value we must first understand the purpose of $p$-value. In general terms,
+$p$-value is the probability that the observed outcome is equal to or more extreme than the expected
+outcome. Essentially, it is used to quantify the statistical significance of observed results in an
+effort to reject the established null hypothesis[1]. The null hypothesis $H_0$ is formulated to 
+represent the condition where no significant event occurs; conversely, the alternative hypothesis 
+$H_1$ represents the condition where a significant event occurs. To reject the null hypothesis, we 
+set a threshold $\alpha$ for comparison to the $p$-value. For our pipeline, let the arbitrarily chosen 
+threshold to reject the null hypothesis be $\alpha = 1\times10^{-6}$,
+
+$$ H_0\textrm{: }p \geq 1.0\times10^{-6} $$
+$$ H_1\textrm{: }p < 1.0\times10^{-6} $$
+
+Once we have determined the threshold for rejection of the null hypothesis, we can move on to the
+calculation of the $p$-value. This calculation is the two-sided test for the distribution of the
+data; in our case we will use the binomial distribution. Other potential distributions that could be
+used for our application include the hypergeometric and chi-square distributions; however, the binomial
+should be sufficient for our purposes. To computationally approximate the integral of the binomial 
+distribution, we can use the \texttt{scipy.stats} package which contains a function called 
+\texttt{binom\_test()}. The parameters $\theta = \{x,n,p\}$ of this function are: $x$ the number of 
+successes, $n$ the total number of trials, $p$ the probability of success. More specifically to our 
+pipeline, $x$ is the number of $l$-mers that are occurrences of motif $m$ and $n$ is the total number 
+of $l$-mers in the dataset, where $m$ is of length $l$. The last parameter is a little less 
+straightforward because the value needs to be estimated.
+
+
+\subsection{Na\"{i}ve Approach}
+This approach to computing an estimate for the probability of success (in our case this just means finding
+an $l$-mer that is statistically significant) simply relies on finding the sample mean of distinct $l$-mer
+occurrences as an unbiased estimator for the parameter $p$. Below is the simple calculation of the sample 
+mean $\hat{p}$ in terms of parameters $x$ and $n$,
+
+$$ \hat{p} = \frac{x}{n} $$
+
+
+\subsection{Markov Model Approach}
+The na\"{i}ve approach for estimation is not quite adequate when determining the statistical significance 
+as there is much of the data not being taken into account. Using a Markov model instead of the na\"{i}ve 
+approach for the estimation increases the utilization of information present in the data for our estimation.
+Markov chains determines the probability of a given sequence based on the product of transition probabilities 
+in the Markov model, rather than just using the sample mean. For a first-order Markov model, the probability
+is represented by the following,
+
+$$ P = Pr(S_1)\cdot\prod_{i = 2}^{n} Pr(S_i|S_{i-1}) $$
+
+\noindent where $Pr(S_i)$ is the probability of character $S_i$ based on the background model of sequence $S$ 
+and $Pr(S_i|S_{i-1})$ is the transition probability of $S_i$ given that the preceding character is $S_{i-1}$.
+The Markov model is constructed by creating a mapping for all possible transitions within the model (16
+possibilities for a first-order model, $4^k$ for $k$-order). The sequences are then iterated through to
+determine the number of times each possible transition occurs. Transition probabilities are then assigned
+values by dividing number of occurrences of the given transition by total number of transitions from the
+particular starting node. For example: if the transition $A \rightarrow A$ occurs 6 times, 
+$A \rightarrow T$ occurs 3 times,
+$A \rightarrow C$ occurs 8 times,
+$A \rightarrow G$ occurs 5 times; the probabilities for transitions from $A$ would be:
+$$Pr(A|A) = \frac{6}{22} = .273$$
+$$Pr(A|T) = \frac{3}{22} = .136$$
+$$Pr(A|C) = \frac{8}{22} = .364$$
+$$Pr(A|G) = \frac{5}{22} = .227$$
+\\
+\\
+To illustrate the usefulness of a Markov model, suppose that in a series of sequences there are two distinct 
+motifs that occur an equal number of times. In the na\"{i}ve approach, these two distinct motifs would have 
+the same estimated probability; however, with the Markov model it is unlikely that these two distinct 
+motifs would have the same estimated probability, as the product of their transition probabilities would 
+have to be equal.
+
+
+\section{Results \& Discussion}
+To analyze the effectiveness of our calculations, we can calculate the $p$-value for each possible $l$-mer
+in our sequence data. Ideally, only motifs that have a high likelihood of being actual motifs will be
+scored well with low $p$-values and reject the null hypothesis. Using the sequences file 
+\texttt{positive\_genes.fasta} and motif length of 12 as input for the pipeline, there were 23040 distinct 
+sequences found in the unfiltered data. Applying the low-complexity filter, this number drops down to 21350. 
+The twenty motif sequences with the lowest $p$-values are: 
+
+
+\begin{center}
+	\begin{tabular}{| c c | c c|}
+		\hline
+		\multicolumn{2}{| c |}{Unfiltered} & \multicolumn{2}{| c |}{Filtered} \\
+		\hline
+		\textit{TTTTTTTTTTTT} & $2.649998\times10^{-58}$ & CAGCACTCCTGC & $3.482304\times10^{-8}$ \\
+		\textit{TTTTTCTTTTTT} & $1.142853\times10^{-10}$ & TCAGCACTCCTG & $1.248463\times10^{-7}$ \\
+		\textit{TTTTTTCTTTTT} & $2.128183\times10^{-8}$ & GGAATGCTTCCT & $4.785597\times10^{-7}$ \\
+		CAGCACTCCTGC & $3.075061\times10^{-8}$ & GCTTTCGACGTA & $4.785597\times10^{-7}$ \\
+		TCAGCACTCCTG & $1.102143\times10^{-7}$ & ATGCTTTCGACG & $4.786337\times10^{-7}$ \\
+		ATGCTTTCGACG & $3.675220\times10^{-7}$ & TGGAATGCTTCC & $4.792504\times10^{-7}$ \\
+		GGAATGCTTCCT & $3.696426\times10^{-7}$ & CCAAACCTCATT & $6.646762\times10^{-7}$ \\
+		GCTTTCGACGTA & $3.696426\times10^{-7}$ & TGCTTTCGACGT & $6.918790\times10^{-7}$ \\
+		TGGAATGCTTCC & $3.701234\times10^{-7}$ & CAACAAAAATCC & $7.902159\times10^{-7}$ \\
+		TGCTTTCGACGT & $4.390882\times10^{-7}$ & ACACACCAAATA & $7.907213\times10^{-7}$ \\
+		GCTTCCTTTCTG & $5.525666\times10^{-7}$ & GTTTCAAGAACG & $8.213701\times10^{-7}$ \\
+		CTTCCTTTCTGC & $5.849518\times10^{-7}$ & CAAAAATCCAAG & $8.478478\times10^{-7}$ \\
+		AAACTACCAAGG & $7.029208\times10^{-7}$ & CTTCCTTTCTGC & $8.659784\times10^{-7}$ \\
+		GTTTCAAGAACG & $9.367088\times10^{-7}$ & GCTTCCTTTCTG & $9.295849\times10^{-7}$ \\
+		TGTTTTAAATTA & $1.045540\times10^{-6}$ & CAATGCTTTCGA & $1.104609\times10^{-6}$ \\
+		AATTGCTTGGCA & $1.104837\times10^{-6}$ & AATGCTTTCGAC & $1.105315\times10^{-6}$ \\
+		CCAAACCTCATT & $1.118712\times10^{-6}$ & AATTGCTTGGCA & $1.185921\times10^{-6}$ \\
+		AATGCTTTCGAC & $1.173514\times10^{-6}$ & ATGAATCCAAAC & $1.224741\times10^{-6}$ \\
+		CAATGCTTTCGA & $1.176328\times10^{-6}$ & CCTTTCTGCTAA & $1.486207\times10^{-6}$ \\
+		GGTCAATGCTTT & $1.318213\times10^{-6}$ & CTTTCGACGTAT & $1.594581\times10^{-6}$ \\
+		\hline
+	\end{tabular}
+\end{center}
+\noindent \textit{Note: the italicized motifs in the "Unfiltered" column were not present in the 
+	filtered data} \\ 
+
+
+The currently implemented method of computing $p$-values in the GASP pipeline can only take a single
+consensus motif as input. To make the pipeline more robust, it would be beneficial to also add the ability
+to take multiple motifs or a PWM as input parameters in addition to a single consensus motif [2]. Although
+the results so far do seem moderately promising, it is difficult to tell the effectiveness of these 
+computations for $p$-value without other scoring mechanisms for relative comparison and increased
+confidence.
+
+\subsection{Side Notes on Unfiltered vs. Filtered Data}
+After studying some of the $p$-values generated from the unfiltered and filtered data, there were some
+interesting discrepancies between the two as a result of the low-complexity sequence masking. In general,
+most of the sequences retain their relative order within the top twenty sequences; however there are some
+notable outliers:
+
+\begin{center}
+	\begin{tabular}{| c | c | c | c |}
+		\hline
+		Unfiltered Motif & $p$-value & Unfiltered Rank & Filtered Rank \\
+		\hline
+		TTTTTTTTTTTT & $2.6499983151712726\times10^{-58}$ & 1 & N/A \\
+		TTTTTCTTTTTT & $1.1428538156799511\times10^{-10}$ & 2 & N/A \\
+		TTTTTTCTTTTT & $2.1281839612839577\times10^{-8}$ & 3 & N/A \\
+		CAGCACTCCTGC & $3.0750613401552712\times10^{-8}$ & 4 & 1 \\
+		TCAGCACTCCTG & $1.1021432100320698\times10^{-7}$ & 5 & 2 \\
+		ATGCTTTCGACG & $3.6752200803119519\times10^{-7}$ & 6 & 5 \\
+		GGAATGCTTCCT & $3.6964267262968008\times10^{-7}$ & 7 & 3 \\
+		GCTTTCGACGTA & $3.6964267262968008\times10^{-7}$ & 8 & 4 \\
+		TGGAATGCTTCC & $3.7012341268741639\times10^{-7}$ & 9 & 6 \\
+		TGCTTTCGACGT & $4.3908822022035107\times10^{-7}$ & 10 & 8 \\
+		GCTTCCTTTCTG & $5.5256668497249088\times10^{-7}$ & 11 & 14 \\
+		CTTCCTTTCTGC & $5.8495188300691534\times10^{-7}$ & 12 & 13 \\
+		AAACTACCAAGG & $7.029208550022092\times10^{-7}$ & 13 & 5145 \\
+		GTTTCAAGAACG & $9.3670887239749622\times10^{-7}$ & 14 & 11 \\
+		TGTTTTAAATTA & $1.0455404078440172\times10^{-6}$ & 15 & 323 \\
+		AATTGCTTGGCA & $1.1048377352226602\times10^{-6}$ & 16 & 17 \\
+		CCAAACCTCATT & $1.1187120969193656\times10^{-6}$ & 17 & 7 \\
+		AATGCTTTCGAC & $1.1735144778682587\times10^{-6}$ & 18 & 16 \\
+		CAATGCTTTCGA & $1.1763281539111292\times10^{-6}$ & 19 & 15 \\
+		GGTCAATGCTTT & $1.3182132144143742\times10^{-6}$ & 20 & 24 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+As seen in the table above, there is a huge discrepancy between the ranking for unfiltered motif rank 13
+and the filtered counterpart with rank 5145. The $p$-values are quite different as well, with the unfiltered
+$p = 7.029208550022092\times10^{-7}$ and the filtered $p = 8.5705808504802467\times10^{-4}$.
+
+\pagebreak
+\section{References}
+[1] Milton, J. Susan, and Jesse C. Arnold. \textit{Introduction to Probability and Statistics: \\
+\indent \indent Principles and Applications for Engineering and the Computing Sciences}. Boston: \\
+\indent \indent McGraw-Hill, 2003. Print. \\
+
+\noindent [2] Zhang J, Jiang B, Li M, Tromp J, Zhang X, Zhang M: "Computing exact P-values for \\
+\indent \indent DNA motifs",  \textit{Bioinformatics} 2007, 23(5): 531-537. \\
+
+\end{document}

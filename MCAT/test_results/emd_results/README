@@ -1,0 +1,10 @@
+This directory contains the results of running EMD on both the synthetic and ECRDB62A data. 
+
+EMD outputs results like this:
+
+motif number
+site-sequence, sequence ID, start position in sequence, length
+
+These results were created using the data and shell script in the directory test_data/
+
+They were run using a default width of 15 and 5 motifs.
