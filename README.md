@@ -1,9 +1,9 @@
 This is a pipeline for finding motifs in fasta files.
 It can be run from the command line as follows:
 
-usage: orange_pipeline.py [-h] [-w W] [--nmotifs NMOTIFS] [--iter ITER] [-c C]
-                          [-s S] [-d] [-ff] [-v V]
-                          positive_seq negative_seq
+usage: orange_pipeline_refine.py [-h] [-w W] [--nmotifs NMOTIFS] [--iter ITER] [-c C]
+                                 [-s S] [-d] [-ff] [-v V]
+                                 positive_seq negative_seq
 
 positional arguments:
   positive_seq       the fasta file for the positive sequences
