@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 # Written (mostly) by Jeff Robertson (thejar@vt.edu)
-# with notable help from Yanshen Yang (yanshen@vt.edu)
+# with notable help from Yanshen Yang (yanshen@vt.edu) and Jacob Martinez (jmartinez@vt.edu)
 # originally for CS4884 Spring 2016 Class project
 
 import threading
