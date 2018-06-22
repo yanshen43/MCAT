@@ -1,7 +1,8 @@
 #! /usr/bin/python
 
 # Written (mostly) by Jeff Robertson (thejar@vt.edu)
-# with notable help from Jacob Martinez (jmartinez@vt.edu) and Yanshen Yang (yanshen@vt.edu)
+# with notable help from Yanshen Yang (yanshen@vt.edu) and Zhen Guo(zguo@vt.edu)
+# use orange_pipeline_refine instead of orange_pipeline
 # originally for CS4884 Spring 2016 Class project
 
 import threading
