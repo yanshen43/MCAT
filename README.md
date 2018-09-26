@@ -48,5 +48,5 @@ Python 2.7
 perl 5.16.3
 Chostscript 9.07
 
-(https://github.com/yanshen43/MCAT/blob/master/vis.png)
+![alt text](https://github.com/yanshen43/MCAT/blob/master/vis.png)
 
